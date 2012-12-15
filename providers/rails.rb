@@ -31,8 +31,7 @@ action :before_compile do
   end
 
   new_resource.environment.update({
-    "RAILS_ENV" => new_resource.environment_name,
-    "PATH" => [Gem.default_bindir, ENV['PATH']].join(':')
+    "RAILS_ENV" => new_resource.environment_name
   })
 
   new_resource.symlink_before_migrate.update({
