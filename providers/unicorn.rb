@@ -56,7 +56,7 @@ action :before_restart do
   new_resource = @new_resource
 
   unicorn_config "/etc/unicorn/#{new_resource.name}.rb" do
-    listen({ new_resource.port => new_resource.options })
+    listen({ (new_resource.socket_location || new_resource.port) => new_resource.options })
     working_directory ::File.join(new_resource.path, 'current')
     worker_timeout new_resource.worker_timeout
     preload_app new_resource.preload_app
